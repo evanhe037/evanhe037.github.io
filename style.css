@@ -2,6 +2,7 @@ body {
   margin: 0;
   min-height: 100vh;
 
+  /* your existing background (KEEP THIS) */
   background: linear-gradient(
     135deg,
     #0f2027,
@@ -10,4 +11,104 @@ body {
   );
 
   background-attachment: fixed;
+
+  /* added for intro animation */
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}/* MAIN CONTENT hidden initially */
+#content {
+  opacity: 0;
+  animation: contentFade 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation-delay: 1.8s;
+  padding: 40px;
+}
+
+/* INTRO OVERLAY */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+
+  animation: introFade 1s ease forwards;
+  animation-delay: 1.6s;
+}
+
+/* SWIRLS */
+.swirl {
+  position: absolute;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #00ffcc,
+    #0066ff,
+    #8a2be2,
+    #00ffcc
+  );
+
+  filter: blur(30px);
+}
+
+/* Layer 1 */
+.swirl1 {
+  width: 300px;
+  height: 300px;
+  animation: swirlAnim 1.8s ease-in-out forwards;
+}
+
+/* Layer 2 */
+.swirl2 {
+  width: 450px;
+  height: 450px;
+  opacity: 0.5;
+  animation: swirlAnimReverse 1.9s ease-in-out forwards;
+}
+
+/* Layer 3 */
+.swirl3 {
+  width: 600px;
+  height: 600px;
+  opacity: 0.3;
+  animation: swirlAnim 2.1s ease-in-out forwards;
+}
+
+/* SWIRL ANIMATIONS */
+@keyframes swirlAnim {
+  0% {
+    transform: scale(3) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes swirlAnimReverse {
+  0% {
+    transform: scale(3) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(-720deg);
+    opacity: 0;
+  }
+}
+
+/* FADE OUT INTRO */
+@keyframes introFade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* REVEAL PAGE */
+@keyframes contentFade {
+  to {
+    opacity: 1;
+  }
 }
